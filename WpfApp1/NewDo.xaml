@@ -1,0 +1,72 @@
+﻿<Window x:Class="WpfApp1.NewDo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="NewDo" Height="450" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto">
+            </RowDefinition>
+            <RowDefinition>
+            </RowDefinition>
+            <RowDefinition>
+            </RowDefinition>
+            <RowDefinition>
+            </RowDefinition>
+            <RowDefinition Height="Auto">
+            </RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   TextAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="26">
+            Новое дело
+        </TextBlock>
+        <GroupBox Background="#FDF5DF" 
+              x:Name="groupBoxToDo" 
+              Visibility="Visible"
+              Grid.Row="1"
+              Grid.RowSpan="3">
+            <StackPanel>
+                <TextBlock> 
+                    Название:
+                </TextBlock>
+                <TextBox TextWrapping="Wrap"  
+                     AcceptsReturn="True"  
+                     AcceptsTab="True"  
+                     x:Name="titleToDo"/>
+                <TextBlock> 
+                    Выполнить до:
+                </TextBlock>
+                <DatePicker x:Name="dateToDo"/>
+                <TextBlock> 
+                    Описание:
+                </TextBlock>
+                <TextBox TextWrapping="Wrap"  
+                     AcceptsReturn="True"  
+                     AcceptsTab="True"  
+                     Height="186"  
+                     x:Name="descriptionToDo" 
+                     MaxLines="10"/>
+            </StackPanel>
+        </GroupBox>
+        <Button Background="#5EBEC4"  
+            Grid.Row="4"  
+            Margin="100 10 150 10"  
+            MaxHeight="40"  
+            MaxWidth="145" 
+            x:Name="buttonToDo" 
+            Padding="5"
+            Click="SaveDo">
+            Сохранить дело
+            <Button.ToolTip>
+                <ToolTip>
+                    При добавлении дело будет добавлено и его придется сделать
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+    </Grid>
+</Window>

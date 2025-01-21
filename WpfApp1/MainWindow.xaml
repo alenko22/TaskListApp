@@ -5,20 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Окно" Height="450" Width="400"
+        Icon="D:\Шутов ИС-316\изображенияпр17(1)\icon.png">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="32*">
-            </ColumnDefinition>
-            <ColumnDefinition Width="46*">
-            </ColumnDefinition>
-            <ColumnDefinition Width="3*">
-            </ColumnDefinition>
-            <ColumnDefinition Width="47*">
-            </ColumnDefinition>
-            <ColumnDefinition Width="32*">
-            </ColumnDefinition>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto">
             </RowDefinition>
@@ -31,86 +20,73 @@
             <RowDefinition Height="Auto">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="26"> 
+        <TextBlock Grid.Row="0"
+                   TextAlignment="Left"
+                   VerticalAlignment="Center"
+                   FontSize="26"
+                   Margin="20 0 0 0"> 
         Список дел
         </TextBlock>
-        <ListBox Grid.Row="1" 
-                 Grid.ColumnSpan="2" 
+        <DataGrid Grid.Row="1" 
                  Grid.RowSpan="3" 
                  Background="#FDF5DF" 
-                 x:Name="listToDo">
-            <ListBox.ItemTemplate>
+                 x:Name="listToDo"
+                 AutoGenerateColumns="False"
+                 GridLinesVisibility="None">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Path=Doing}"
+                                      Click ="CheckBoxDoingClick"></CheckBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="10*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Date, StringFormat=dd.MM.yy}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Background="#5EBEC4" Name="ButtonDelete" Click="ButtonDelete_Click">
+                                <Image Source="D:\Шутов ИС-316\изображенияпр17(1)\delete.png" MaxWidth="10" MaxHeight="10"></Image>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+            <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path=nameToDo}"></TextBlock>
+                    <TextBlock Text="{Binding Path=Description}"></TextBlock>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <Button Background="#5EBEC4"  
-            Grid.Row="4"  
-            Grid.ColumnSpan="2"  
-            Grid.RowSpan="2"  
-            Margin="100 10 150 10"  
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        <Button Background="#5EBEC4"
+            Grid.Row="0" 
+            Margin="0 0 20 0"
             MaxHeight="40"  
             MaxWidth="145" 
-            Padding="5"
-            x:Name="ButtonDelete"
-            Click="ButtonDelete_Click">
-            Удалить дела
+            Padding="10"
+            x:Name="buttonToDo"
+            Click="ButtonToDoClick"
+            HorizontalAlignment="Right">
+            <Image Source="D:\Шутов ИС-316\изображенияпр17(1)\add.png">
+            </Image>
         </Button>
-        <Button Background="#5EBEC4"  
-            Grid.Row="4"  
-            Grid.Column="3" 
-            Grid.ColumnSpan="2"  
-            Grid.RowSpan="2"  
-            Margin="100 10 150 10"  
-            MaxHeight="40"  
-            MaxWidth="145" 
-            x:Name="buttonToDo" 
-            Padding="5"
-            Click="buttonToDo_Click">
-            Добавить дело
-            <Button.ToolTip>
-                <ToolTip>
-                    При добавлении дело будет добавлено и его придется сделать
-                </ToolTip>
-            </Button.ToolTip>
-        </Button>
-        <CheckBox Grid.Column="3"  
-              VerticalAlignment="Bottom"  
-              IsChecked="False" 
-              Checked="CheckBox_Checked" 
-              Unchecked="CheckBox_Unchecked">
-            Добавление новых дел
-        </CheckBox>
-        <GroupBox Grid.Row="1"  
-              Grid.Column="3"  
-              Grid.ColumnSpan="2"  
-              Grid.RowSpan="3" 
-              Background="#FDF5DF" 
-              x:Name="groupBoxToDo" 
-              Visibility="Collapsed">
-            <StackPanel>
-                <TextBlock> 
-                    Название:
-                </TextBlock>
-                <TextBox TextWrapping="Wrap"  
-                     AcceptsReturn="True"  
-                     AcceptsTab="True"  
-                     x:Name="titleToDo"/>
-                <TextBlock> 
-                    Выполнить до:
-                </TextBlock>
-                <DatePicker x:Name="dateToDo"/>
-                <TextBlock> 
-                    Описание:
-                </TextBlock>
-                <TextBox TextWrapping="Wrap"  
-                     AcceptsReturn="True"  
-                     AcceptsTab="True"  
-                     Height="186"  
-                     x:Name="descriptionToDo" 
-                     MaxLines="10"/>
-            </StackPanel>
-        </GroupBox>
     </Grid>
 </Window>

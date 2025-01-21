@@ -19,36 +19,45 @@ namespace WpfApp1
         {
             InitializeComponent();
 
-            descriptionToDo.Text = "Описания нет";
-            dateToDo.SelectedDate = new DateTime(day: 10, month: 1, year: 2024);
-
             ToDos = new List<ToDo>
             {
                 new ToDo("Помыть пол", new DateTime(1111, 12, 22), "Просто помыть пол"),
-                new ToDo("Слетать на Луну", new DateTime(3111, 11, 1), "Посмотреть как тоам"),
+                new ToDo("Слетать на Луну", new DateTime(3111, 11, 1), "Посмотреть как там"),
                 new ToDo("Посмотреть начало Нашей Эры", new DateTime(1, 12, 22), "Интересно же")
             };
 
         }
 
-        private void buttonToDo_Click(object sender, RoutedEventArgs e)
+        private void ClearGroupBoxToDo()
         {
+        }
 
+        private void UpdateListToDo()
+        {
+            listToDo.ItemsSource = null;
+            listToDo.ItemsSource = ToDos;
         }
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
         {
+            ToDos.Remove(listToDo.SelectedItem as ToDo);
 
+            UpdateListToDo();
         }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void ButtonToDoClick(object sender, RoutedEventArgs e)
         {
-            groupBoxToDo.Visibility = Visibility.Visible;
+            NewDo newDo = new NewDo();
+            newDo.Owner = this;
+            newDo.Show();
         }
-
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        private void CheckBoxDoingClick(object sender, RoutedEventArgs e)
         {
-            groupBoxToDo.Visibility=Visibility.Collapsed;
+            if (listToDo.SelectedItem == null)
+            {
+                return;
+            }
+
+            (listToDo.SelectedItem as ToDo).Doing = !(listToDo.SelectedItem as ToDo).Doing;
         }
     }
 }

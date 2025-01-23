@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="Окно" Height="450" Width="400"
-        Icon="D:\Шутов ИС-316\изображенияпр17(1)\icon.png">
+        Icon="\Resources\icon.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto">
@@ -63,7 +63,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Background="#5EBEC4" Name="ButtonDelete" Click="ButtonDelete_Click">
-                                <Image Source="D:\Шутов ИС-316\изображенияпр17(1)\delete.png" MaxWidth="10" MaxHeight="10"></Image>
+                                <Image Source="\Resources\delete.png" MaxWidth="10" MaxHeight="10"></Image>
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -85,7 +85,7 @@
             x:Name="buttonToDo"
             Click="ButtonToDoClick"
             HorizontalAlignment="Right">
-            <Image Source="D:\Шутов ИС-316\изображенияпр17(1)\add.png">
+            <Image Source="\Resources\add.png">
             </Image>
         </Button>
     </Grid>

@@ -25,11 +25,8 @@ namespace WpfApp1
                 new ToDo("Слетать на Луну", new DateTime(3111, 11, 1), "Посмотреть как там"),
                 new ToDo("Посмотреть начало Нашей Эры", new DateTime(1, 12, 22), "Интересно же")
             };
+            listToDo.ItemsSource = ToDos;
 
-        }
-
-        private void ClearGroupBoxToDo()
-        {
         }
 
         private void UpdateListToDo()

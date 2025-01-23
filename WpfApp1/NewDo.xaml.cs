@@ -19,16 +19,9 @@ namespace WpfApp1
     /// </summary>
     public partial class NewDo : Window
   {  
-        public List<ToDo> ToDos { get; set; }
         public NewDo()
         {
             InitializeComponent();
-            ToDos =
-            [
-                new ToDo("Помыть пол", new DateTime(1111, 12, 22), "Просто помыть пол"),
-                new ToDo("Слетать на Луну", new DateTime(3111, 11, 1), "Посмотреть как там"),
-                new ToDo("Посмотреть начало Нашей Эры", new DateTime(1, 12, 22), "Интересно же")
-            ];
         }
         private void ClearGroupBoxToDo()
         {
@@ -40,7 +33,7 @@ namespace WpfApp1
         private void UpdateListToDo()
         {
             (this.Owner as MainWindow).listToDo.ItemsSource = null;
-            (this.Owner as MainWindow).listToDo.ItemsSource = ToDos;
+            (this.Owner as MainWindow).listToDo.ItemsSource = (this.Owner as MainWindow).ToDos;
         }
         public void SaveDo(object sender, RoutedEventArgs e)
         {
@@ -49,7 +42,7 @@ namespace WpfApp1
             dateToDo.SelectedDate.Value,
             descriptionToDo.Text
             );
-            ToDos.Add(task);
+            (this.Owner as MainWindow).ToDos.Add(task);
 
             ClearGroupBoxToDo();
             UpdateListToDo();

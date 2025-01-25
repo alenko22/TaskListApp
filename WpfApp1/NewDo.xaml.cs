@@ -46,6 +46,7 @@ namespace WpfApp1
 
             ClearGroupBoxToDo();
             UpdateListToDo();
+            this.Close();
         }
     }
 }

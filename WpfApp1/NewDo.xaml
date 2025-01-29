@@ -6,6 +6,12 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="NewDo" Height="450" Width="400">
+    <Window.Resources>
+        <Style TargetType="DatePicker">
+            <Setter Property="DisplayDate" Value="">
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto">

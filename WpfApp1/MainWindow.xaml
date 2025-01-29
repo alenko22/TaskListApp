@@ -7,6 +7,22 @@
         mc:Ignorable="d"
         Title="Окно" Height="450" Width="400"
         Icon="\Resources\icon.png">
+    <Window.Resources>
+        <Style TargetType="DataGrid">
+            <Setter Property="AutoGenerateColumns" Value="False">
+            </Setter>
+            <Setter Property="CanUserAddRows" Value="False">
+            </Setter>
+            <Setter Property="CanUserDeleteRows" Value="False">
+            </Setter>
+            <Setter Property="AlternatingRowBackground" Value="White">
+            </Setter>
+            <Setter Property="RowBackground" Value="#FFFDFAF1">
+            </Setter>
+            <Setter Property="GridLinesVisibility" Value="Horizontal">
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto">
@@ -24,7 +40,8 @@
                    TextAlignment="Left"
                    VerticalAlignment="Center"
                    FontSize="26"
-                   Margin="20 0 0 0"> 
+                   Margin="20 0 0 0"
+                   Style="{StaticResource HeaderStyle}"> 
         Список дел
         </TextBlock>
         <DataGrid Grid.Row="1" 
@@ -76,7 +93,7 @@
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
-        <Button Background="#5EBEC4"
+        <Button
             Grid.Row="0" 
             Margin="0 0 20 0"
             MaxHeight="40"  

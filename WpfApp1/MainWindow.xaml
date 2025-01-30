@@ -55,7 +55,8 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <CheckBox IsChecked="{Binding Path=Doing}"
-                                      Click ="CheckBoxDoingClick"></CheckBox>
+                                      Click ="CheckBoxDoingClick"
+                                      x:Name="CheckBoxDoing"></CheckBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -105,5 +106,18 @@
             <Image Source="\Resources\add.png">
             </Image>
         </Button>
+        <ProgressBar Grid.Row="3"
+                     Margin="0 100 5 5"
+                     x:Name="ProgressToDo"
+                     Minimum="{Binding EndToDo.Minimum}"
+                     Maximum="{Binding EndToDo.Maximum}"
+                     Value="{Binding EndToDo.Value}">
+        </ProgressBar>
+        <TextBlock Grid.Row="3"
+                   Margin="0 100 5 5"
+                   x:Name="TextProgressToDo"
+                   Visibility="Visible">
+  
+        </TextBlock>
     </Grid>
 </Window>

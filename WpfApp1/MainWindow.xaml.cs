@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Collections.Generic;
+using System.Runtime.Intrinsics;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +28,6 @@ namespace WpfApp1
                 new ToDo("Посмотреть начало Нашей Эры", new DateTime(1, 12, 22), "Интересно же")
             };
             listToDo.ItemsSource = ToDos;
-
         }
 
         private void UpdateListToDo()
@@ -55,6 +56,21 @@ namespace WpfApp1
             }
 
             (listToDo.SelectedItem as ToDo).Doing = !(listToDo.SelectedItem as ToDo).Doing;
+        }
+        private void EndToDo(object sender, RoutedEventArgs e)
+        {
+            ProgressToDo.Minimum = 0;
+            ProgressToDo.Maximum = 100;
+            ProgressToDo.Value = 50;
+            int Minimum = 0;
+            int Maximum = 100;
+            int Value = 50;
+        }
+        private void TText(object sender, RoutedEventArgs e)
+        {
+            int v1 = ToDos.Count;
+            int v2 = ToDos.Where(p => p.Doing).Count();
+            TextProgressToDo.Text = $"{v2}/{v1}";
         }
     }
 }

@@ -8,7 +8,22 @@
         Title="NewDo" Height="450" Width="400">
     <Window.Resources>
         <Style TargetType="DatePicker">
-            <Setter Property="DisplayDate" Value="">
+            <Setter Property="SelectedDateFormat" Value="Long">
+            </Setter>
+            <Setter Property="BorderThickness" Value="1.5">
+            </Setter>
+            <Setter Property="BorderBrush" Value="#5EBEC4">
+            </Setter>
+            <Setter Property="Background" Value="White">
+            </Setter>
+            <Setter Property="CalendarStyle">
+                <Setter.Value>
+                    <Style TargetType="Calendar">
+                        <Setter Property="BorderThickness" Value="1.5"/>
+                        <Setter Property="BorderBrush" Value="#5EBEC4"/>
+                        <Setter Property="Background" Value="#FFFDFAF1"/>
+                    </Style>
+                </Setter.Value>
             </Setter>
         </Style>
     </Window.Resources>

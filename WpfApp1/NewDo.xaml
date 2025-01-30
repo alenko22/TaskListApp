@@ -43,7 +43,8 @@
         <TextBlock Grid.Row="0"
                    TextAlignment="Center"
                    VerticalAlignment="Center"
-                   FontSize="26">
+                   FontSize="26"
+                   Style="{StaticResource HeaderStyle}">
             Новое дело
         </TextBlock>
         <GroupBox Background="#FDF5DF" 

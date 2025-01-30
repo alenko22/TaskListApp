@@ -28,6 +28,7 @@ namespace WpfApp1
                 new ToDo("Посмотреть начало Нашей Эры", new DateTime(1, 12, 22), "Интересно же")
             };
             listToDo.ItemsSource = ToDos;
+            EndToDo();
         }
 
         private void UpdateListToDo()
@@ -41,12 +42,14 @@ namespace WpfApp1
             ToDos.Remove(listToDo.SelectedItem as ToDo);
 
             UpdateListToDo();
+            EndToDo();
         }
         private void ButtonToDoClick(object sender, RoutedEventArgs e)
         {
             NewDo newDo = new NewDo();
             newDo.Owner = this;
             newDo.Show();
+            
         }
         private void CheckBoxDoingClick(object sender, RoutedEventArgs e)
         {
@@ -55,22 +58,30 @@ namespace WpfApp1
                 return;
             }
 
+
+
             (listToDo.SelectedItem as ToDo).Doing = !(listToDo.SelectedItem as ToDo).Doing;
+            EndToDo();
         }
-        private void EndToDo(object sender, RoutedEventArgs e)
+        internal void EndToDo()
         {
-            ProgressToDo.Minimum = 0;
-            ProgressToDo.Maximum = 100;
-            ProgressToDo.Value = 50;
-            int Minimum = 0;
-            int Maximum = 100;
-            int Value = 50;
-        }
-        private void TText(object sender, RoutedEventArgs e)
-        {
-            int v1 = ToDos.Count;
-            int v2 = ToDos.Where(p => p.Doing).Count();
-            TextProgressToDo.Text = $"{v2}/{v1}";
+            int Max = 0;
+            int Val = 0;
+
+
+            Max = ToDos.Count;
+            for (int i = 0; i < Max; i++)
+            {
+                if (ToDos[i].Doing == true)
+                {
+                    Val++;
+                }
+            }
+
+            ProgressToDo.Value = Val;
+            ProgressToDo.Maximum = Max;
+
+            TextProgressToDo.Text = Val + "/" + Max;
         }
     }
 }

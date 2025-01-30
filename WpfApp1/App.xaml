@@ -13,12 +13,23 @@
             </Setter>
             <Setter Property="BorderThickness" Value="0, 0, 0, 0">
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderThickness" Value="3"></Setter>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="BorderThickness" Value="1.5, 1.5, 1.5, 1.5">
             </Setter>
             <Setter Property="BorderBrush" Value="#5EBEC4">
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="Control.IsFocused" Value="True">
+                    <Setter Property="Background" Value="#FFFFFAD6 "></Setter>
+                    <Setter Property="BorderThickness" Value ="2"></Setter>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style x:Key="HeaderStyle">
             <Setter Property="Control.FontSize" Value="26">

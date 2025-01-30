@@ -14,14 +14,12 @@ using System.Windows.Shapes;
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Логика взаимодействия для NewDo.xaml
-    /// </summary>
     public partial class NewDo : Window
   {  
         public NewDo()
         {
             InitializeComponent();
+
         }
         private void ClearGroupBoxToDo()
         {
@@ -47,6 +45,7 @@ namespace WpfApp1
             ClearGroupBoxToDo();
             UpdateListToDo();
             this.Close();
+            (this.Owner as MainWindow).EndToDo();
         }
     }
 }

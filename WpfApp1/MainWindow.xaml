@@ -109,14 +109,15 @@
         <ProgressBar Grid.Row="3"
                      Margin="0 100 5 5"
                      x:Name="ProgressToDo"
-                     Minimum="{Binding EndToDo.Minimum}"
-                     Maximum="{Binding EndToDo.Maximum}"
-                     Value="{Binding EndToDo.Value}">
+                     Foreground="#5EBEC4"
+                     Background="#FDF5DF">
         </ProgressBar>
         <TextBlock Grid.Row="3"
                    Margin="0 100 5 5"
                    x:Name="TextProgressToDo"
-                   Visibility="Visible">
+                   Visibility="Visible"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center">
   
         </TextBlock>
     </Grid>

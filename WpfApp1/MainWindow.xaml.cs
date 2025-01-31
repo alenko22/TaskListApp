@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.Intrinsics;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -57,7 +58,6 @@ namespace WpfApp1
             {
                 return;
             }
-
 
 
             (listToDo.SelectedItem as ToDo).Doing = !(listToDo.SelectedItem as ToDo).Doing;

@@ -25,9 +25,21 @@
         <Style TargetType="TextBlock">
             <Style.Triggers>
                 <Trigger Property="IsFocused" Value="True">
-                    
+
                 </Trigger>
             </Style.Triggers>
+        </Style>
+        <Style x:Key="Fontt">
+            <Style.Triggers>
+                <Trigger Property="ListBox.IsFocused" Value="True">
+                    <Trigger.Setters>
+                        <Setter Property="ListBox.FontWeight" Value="SemiBold"></Setter>
+                    </Trigger.Setters>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="ListBox">
+            
         </Style>
     </Window.Resources>
     <Grid>
@@ -59,7 +71,8 @@
          Grid.Column="0"
          Grid.Row="1"
          Grid.RowSpan="2"
-                 HorizontalContentAlignment="Stretch">
+                 HorizontalContentAlignment="Stretch"
+                 ItemContainerStyle="{StaticResource Fontt}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -75,8 +88,9 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <CheckBox IsChecked="{Binding Path=Doing}" 
-                              Click="CheckBoxDoingClick" 
+                            <CheckBox IsChecked="{Binding Path=Doing}"
+                                      Checked="CheckBoxDoing_Checked"
+                                      Unchecked="CheckBoxDoing_Unchecked"
                               x:Name="CheckBoxDoing"
                               VerticalAlignment="Center"
                               Margin="5"/>

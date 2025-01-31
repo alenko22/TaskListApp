@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 using System.Runtime.Intrinsics;
 using System.Security.Cryptography.X509Certificates;
@@ -40,8 +41,7 @@ namespace WpfApp1
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
         {
-            ToDos.Remove(listToDo.SelectedItem as ToDo);
-
+            ToDos.Remove((sender as Button).DataContext as ToDo);
             UpdateListToDo();
             EndToDo();
         }
@@ -51,17 +51,6 @@ namespace WpfApp1
             newDo.Owner = this;
             newDo.Show();
             
-        }
-        private void CheckBoxDoingClick(object sender, RoutedEventArgs e)
-        {
-            if (listToDo.SelectedItem == null)
-            {
-                return;
-            }
-
-
-            (listToDo.SelectedItem as ToDo).Doing = !(listToDo.SelectedItem as ToDo).Doing;
-            EndToDo();
         }
         internal void EndToDo()
         {
@@ -82,6 +71,54 @@ namespace WpfApp1
             ProgressToDo.Maximum = Max;
 
             TextProgressToDo.Text = Val + "/" + Max;
+        }
+
+        private void CheckBoxDoing_Checked(object sender, RoutedEventArgs e)
+        {
+            ToDo itemToDo = listToDo.SelectedItem as ToDo;
+            if (itemToDo == null)
+            {
+                EndToDo();
+            }
+            else
+            {
+                itemToDo.Doing = true;
+                EndToDo();
+            }
+        }
+
+        private void CheckBoxDoing_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ToDo itemToDo = listToDo.SelectedItem as ToDo;
+            if (itemToDo == null)
+            {
+                EndToDo();
+            }
+            else
+            {
+                itemToDo.Doing = false;
+                EndToDo();
+            }
+        }
+        public class DateTimeConverter : IValueConverter
+        {
+            public object Convert(object value,
+                Type targetType, object parameter, CultureInfo culture)
+            {
+                var d = value as DateTime?;
+                if(d != null )
+                {
+                    return DateTime.Now > d.Value;
+                }
+
+                return false;
+            }
+
+            public object ConvertBack(object value,
+                Type targetType, object parameter, CultureInfo culture)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

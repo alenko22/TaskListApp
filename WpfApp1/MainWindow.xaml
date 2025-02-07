@@ -8,6 +8,7 @@
         Title="Окно" Height="450" Width="400"
         Icon="\Resources\icon.png">
     <Window.Resources>
+
         <Style TargetType="DataGrid">
             <Setter Property="AutoGenerateColumns" Value="False">
             </Setter>
@@ -39,7 +40,14 @@
             </Style.Triggers>
         </Style>
         <Style TargetType="ListBox">
-            
+
+        </Style>
+        <Style TargetType="ListBoxItem">
+            <Style.Triggers>
+                <DataTrigger>
+                    
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
     <Grid>

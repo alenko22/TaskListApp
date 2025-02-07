@@ -100,7 +100,7 @@ namespace WpfApp1
                 EndToDo();
             }
         }
-        public class DateTimeConverter : IValueConverter
+        public class DateTimeLessDateConverter : IValueConverter
         {
             public object Convert(object value,
                 Type targetType, object parameter, CultureInfo culture)

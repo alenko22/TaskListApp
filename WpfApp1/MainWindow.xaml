@@ -8,6 +8,9 @@
         Title="Окно" Height="450" Width="400"
         Icon="\Resources\icon.png">
     <Window.Resources>
+        <local:DateTimeLessDateConverter x:Key="LessDayyConverter"/>
+        <local:DateTimeNowDayConverter x:Key="NowDayyConverter"/>
+        <local:DateTimeNowUpDayConverter x:Key="NowUpDayyConverter"/>
 
         <Style TargetType="DataGrid">
             <Setter Property="AutoGenerateColumns" Value="False">
@@ -39,14 +42,33 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="StrikethroughText">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=CheckBoxDoing, Path=IsChecked}" Value="True">
+                    <Setter Property="TextBlock.TextDecorations" Value="Strikethrough"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Style TargetType="ListBox">
 
         </Style>
-        <Style TargetType="ListBoxItem">
+        <Style x:Key="ColourDate">
+            <Setter Property="TextBlock.Foreground" Value="#FF71C52F">
+                
+            </Setter>
             <Style.Triggers>
-                <DataTrigger>
+                <DataTrigger Binding="{Binding Path=Date, Converter={StaticResource LessDayyConverter}}"
+                             Value="True">
+                    <Setter Property="TextBlock.Foreground" Value="Red"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=Date, Converter={StaticResource LessDayyConverter}}"
+                             Value="True">
+                    <Setter Property="TextBlock.Foreground" Value="#FFEA6A20"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=Date, Converter={StaticResource NowUpDayyConverter}}">
                     
                 </DataTrigger>
+                
             </Style.Triggers>
         </Style>
     </Window.Resources>
@@ -105,11 +127,13 @@
 
                             <TextBlock Text="{Binding Path=Name}"
                                Grid.Column="1"
-                               VerticalAlignment="Center"/>
+                               VerticalAlignment="Center"
+                                       Style="{StaticResource StrikethroughText}"/>
 
                             <TextBlock Text="{Binding Path=Date, StringFormat=dd.MM.yyyy}"
-                               Grid.Column="2"
-                               VerticalAlignment="Center"/>
+                                       Grid.Column="2"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource ColourDate}"/>
 
                             <Button Background="#5EBEC4"
                             Name="ButtonDelete"

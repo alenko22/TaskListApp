@@ -43,5 +43,13 @@
             <Setter Property="Control.FontFamily" Value="Cascadia Mono">
             </Setter>
         </Style>
+        <Style TargetType="DatePickerTextBox">
+            <Style.Triggers>
+                <Trigger Property="Control.IsFocused" Value="True">
+                    <Setter Property="Control.Background" Value="#FFFFFAD6 "></Setter>
+                    <Setter Property="Control.BorderThickness" Value ="2"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>

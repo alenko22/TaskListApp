@@ -13,6 +13,10 @@ namespace WpfApp1
         public string Description { get; set; }
 
         public bool Doing { get; set; }
+        public ToDo()
+        {
+
+        }
         public ToDo(string name, DateTime date, string description)
         {
             this.Name = name;

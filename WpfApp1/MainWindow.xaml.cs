@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Win32;
+using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Reflection;
 using System.Runtime.Intrinsics;
 using System.Security.Cryptography.X509Certificates;
@@ -100,5 +102,26 @@ namespace WpfApp1
                 EndToDo();
             }
         }
+        private void SaveTxtFile(string filename, string str)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.ShowDialog();
+            saveFileDialog.Filter = "Normal text file (*.txt)|*.txt";
+            saveFileDialog.OverwritePrompt = true;
+            StringBuilder sb = new StringBuilder();
+            StringBuilder fileContent = sb.AppendLine(str);
+            File.WriteAllText(filename, fileContent.ToString());
+        }
+        private void SaveJSON(object sender, RoutedEventArgs e)
+        {
+            ToDo itemToDo = listToDo.SelectedItem as ToDo;
+
+            ToDo td = new ToDo()
+            {
+                Doing = itemToDo.Doing
+
+            };
+        }
+        
     }
 }

@@ -133,7 +133,8 @@
                             <TextBlock Text="{Binding Path=Date, StringFormat=dd.MM.yyyy}"
                                        Grid.Column="2"
                                        VerticalAlignment="Center"
-                                       Style="{StaticResource ColourDate}"/>
+                                       Style="{StaticResource ColourDate}"
+                                       x:Name="Date"/>
 
                             <Button Background="#5EBEC4"
                             Name="ButtonDelete"
@@ -156,7 +157,7 @@
         </ListBox>
         <Button
             Grid.Row="0" 
-            Margin="0 0 20 0"
+            Margin="0 0 70 0"
             MaxHeight="40"  
             MaxWidth="145" 
             Padding="10"
@@ -164,6 +165,18 @@
             Click="ButtonToDoClick"
             HorizontalAlignment="Right">
             <Image Source="\Resources\add.png">
+            </Image>
+        </Button>
+        <Button
+            Grid.Row="0" 
+            Margin="0 0 20 0"
+            MaxHeight="40"  
+            MaxWidth="145" 
+            Padding="10"
+            x:Name="buttonsaveToDo"
+            Click="ButtonToDoClick"
+            HorizontalAlignment="Right">
+            <Image Source="\Resources\save.png">
             </Image>
         </Button>
         <ProgressBar Grid.Row="3"

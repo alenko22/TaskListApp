@@ -134,10 +134,6 @@ namespace WpfApp1
                 EndToDo();
                 SaveJSON();
             }
-            else
-            {
-                System.Diagnostics.Process.Start("shutdown", "/s /t /f 00");
-            }
         }
 
         private void CommandBinding_Executed_2(object sender, ExecutedRoutedEventArgs e)

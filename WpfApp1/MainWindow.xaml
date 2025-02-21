@@ -12,6 +12,10 @@
         <CommandBinding Command="ApplicationCommands.New"
                     Executed="CommandBinding_Executed">
         </CommandBinding>
+        <CommandBinding Command="ApplicationCommands.Save"
+                        Executed="CommandBinding_Executed_2">
+            
+        </CommandBinding>
     </Window.CommandBindings>
     <Window.Resources>
         <local:DateTimeLessDateConverter x:Key="LessDayyConverter"/>
@@ -151,7 +155,7 @@
 
                             <Button Background="#5EBEC4"
                             Name="ButtonDelete"
-                            Command="ApplicationCommands.Delete"
+                            Click="ButtonDelete_Click"
                             Grid.Column="3"
                             VerticalAlignment="Center">
                                 <Image Source="\Resources\delete.png" 
@@ -187,7 +191,7 @@
             MaxWidth="145" 
             Padding="10"
             x:Name="buttonsaveToDo"
-            Click="SaveTxtFile"
+            Command="ApplicationCommands.Save"
             HorizontalAlignment="Right">
             <Image Source="\Resources\save.png">
             </Image>

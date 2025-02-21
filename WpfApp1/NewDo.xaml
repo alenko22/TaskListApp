@@ -6,6 +6,17 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="NewDo" Height="450" Width="400">
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:NewDo.AddToDoCommand}"
+                        Executed="CommandBinding_Executed">
+            
+        </CommandBinding>
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Key="E" Command="{x:Static local:NewDo.AddToDoCommand}">
+            
+        </KeyBinding>
+    </Window.InputBindings>
     <Window.Resources>
         <Style TargetType="DatePicker">
             <Setter Property="SelectedDateFormat" Value="Long">
@@ -63,7 +74,8 @@
                 <TextBlock> 
                     Выполнить до:
                 </TextBlock>
-                <DatePicker x:Name="dateToDo"/>
+                <DatePicker x:Name="dateToDo"
+                            DisplayDate="{Binding Today}"/>
                 <TextBlock> 
                     Описание:
                 </TextBlock>

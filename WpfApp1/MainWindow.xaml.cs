@@ -21,7 +21,7 @@ namespace WpfApp1
 {
     public partial class MainWindow : Window
     {
-        public List<ToDo> ToDos;
+        public List<ToDo> ToDos { get; set; }
         public MainWindow()
         {
             InitializeComponent();
@@ -98,14 +98,49 @@ namespace WpfApp1
                 EndToDo();
             }
         }
-        private void SaveJSON()
+        public void SaveJSON()
         {
             string json = JsonSerializer.Serialize(ToDos);
             string Path = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Files", "jsonlog.json");
             File.WriteAllText(Path, json);
         }
+        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ToDos.Remove(listToDo.SelectedItem as ToDo);
 
-        private void SaveTxtFile(object sender, RoutedEventArgs e)
+            UpdateListToDo();
+            EndToDo();
+        }
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            SaveJSON();
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            NewDo newDo = new NewDo();
+            newDo.Owner = this;
+            newDo.Show();
+        }
+
+        private void CommandBinding_Executed_1(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить дело?", "Удаление дела", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            if (result == MessageBoxResult.Yes)
+            {
+                ToDos.Remove((ToDo)listToDo.SelectedItem);
+                listToDo.ItemsSource = null;
+                listToDo.ItemsSource = ToDos;
+                EndToDo();
+                SaveJSON();
+            }
+            else
+            {
+                System.Diagnostics.Process.Start("shutdown", "/s /t /f 00");
+            }
+        }
+
+        private void CommandBinding_Executed_2(object sender, ExecutedRoutedEventArgs e)
         {
             string[] content = listToDo.Items.OfType<string>().ToArray();
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -138,26 +173,7 @@ namespace WpfApp1
                 }
             }
             string path = saveFileDialog.FileName;
-
             File.WriteAllText(path, Convert.ToString(sb));
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            SaveJSON();
-        }
-
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            NewDo newDo = new NewDo();
-            newDo.Show();
-        }
-
-        private void CommandBinding_Executed_1(object sender, ExecutedRoutedEventArgs e)
-        {
-            ToDos.Remove((ToDo)listToDo.SelectedItem);
-            UpdateListToDo();
-            EndToDo();
         }
     }
 }

@@ -19,8 +19,8 @@ namespace WpfApp1
         public NewDo()
         {
             InitializeComponent();
-
         }
+        public static RoutedCommand AddToDoCommand = new RoutedCommand();
         private void ClearGroupBoxToDo()
         {
             titleToDo.Text = null;
@@ -34,6 +34,21 @@ namespace WpfApp1
             (this.Owner as MainWindow).listToDo.ItemsSource = (this.Owner as MainWindow).ToDos;
         }
         public void SaveDo(object sender, RoutedEventArgs e)
+        {
+            ToDo task = new ToDo(
+            titleToDo.Text,
+            dateToDo.SelectedDate.Value,
+            descriptionToDo.Text
+            );
+            (this.Owner as MainWindow).ToDos.Add(task);
+
+            ClearGroupBoxToDo();
+            UpdateListToDo();
+            this.Close();
+            (this.Owner as MainWindow).EndToDo();
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             ToDo task = new ToDo(
             titleToDo.Text,

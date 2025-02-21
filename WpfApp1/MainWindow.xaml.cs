@@ -106,8 +106,23 @@ namespace WpfApp1
         }
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
         {
-            ToDos.Remove(listToDo.SelectedItem as ToDo);
+            MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить дело?", "Удаление дела", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            if (result == MessageBoxResult.Yes)
+            {
+                if (sender != null)
+                {
+                    ToDos.Remove(((Button)sender).DataContext as ToDo);
+                }
+                else
+                {
+                    ToDos.Remove((ToDo)listToDo.SelectedItem);
+                }
 
+                listToDo.ItemsSource = null;
+                listToDo.ItemsSource = ToDos;
+                EndToDo();
+                SaveJSON();
+            }
             UpdateListToDo();
             EndToDo();
         }
@@ -129,6 +144,7 @@ namespace WpfApp1
             if (result == MessageBoxResult.Yes)
             {
                 ToDos.Remove((ToDo)listToDo.SelectedItem);
+
                 listToDo.ItemsSource = null;
                 listToDo.ItemsSource = ToDos;
                 EndToDo();
@@ -138,6 +154,11 @@ namespace WpfApp1
 
         private void CommandBinding_Executed_2(object sender, ExecutedRoutedEventArgs e)
         {
+            if (ToDos.Count == 0)
+            {
+                MessageBoxResult result = MessageBox.Show("В списке нет дел", " ", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
             string[] content = listToDo.Items.OfType<string>().ToArray();
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Normal text file (*.txt)|*.txt";
@@ -169,7 +190,15 @@ namespace WpfApp1
                 }
             }
             string path = saveFileDialog.FileName;
-            File.WriteAllText(path, Convert.ToString(sb));
+            if (path == null)
+            {
+                return;
+            }
+            else
+            {
+                File.WriteAllText(path, Convert.ToString(sb));
+
+            }
         }
     }
 }

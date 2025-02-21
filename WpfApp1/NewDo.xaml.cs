@@ -19,6 +19,7 @@ namespace WpfApp1
         public NewDo()
         {
             InitializeComponent();
+            dateToDo.SelectedDate = DateTime.Now;
         }
         public static RoutedCommand AddToDoCommand = new RoutedCommand();
         private void ClearGroupBoxToDo()

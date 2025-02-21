@@ -50,6 +50,12 @@ namespace WpfApp1
             newDo.Show();
             
         }
+        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ToDos.Remove((ToDo)listToDo.SelectedItem);
+            UpdateListToDo();
+            EndToDo();
+        }
         internal void EndToDo()
         {
             int Max = 0;
@@ -158,6 +164,43 @@ namespace WpfApp1
             ToDos.Remove((ToDo)listToDo.SelectedItem);
             UpdateListToDo();
             EndToDo();
+        }
+
+        private void CommandBinding_Executed_2(object sender, ExecutedRoutedEventArgs e)
+        {
+            string[] content = listToDo.Items.OfType<string>().ToArray();
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Normal text file (*.txt)|*.txt";
+            saveFileDialog.ShowDialog();
+            saveFileDialog.OverwritePrompt = true;
+            StringBuilder sb = new StringBuilder();
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    for (int i = 0; i < ToDos.Count; i++)
+                    {
+                        if (ToDos[i].Doing == true)
+                        {
+                            sb.Append("✓");
+                        }
+                        else
+                        {
+                            sb.Append(" ");
+                        }
+                        sb.AppendLine(Convert.ToString(ToDos[i].Name));
+                        sb.AppendLine(" ");
+                        sb.AppendLine(Convert.ToString(ToDos[i].Description));
+                        sb.AppendLine(" ");
+                        sb.AppendLine(Convert.ToString(ToDos[i].Date));
+                        sb.AppendLine(" ");
+                        sb.AppendLine(" ");
+                    }
+                }
+            }
+            string path = saveFileDialog.FileName;
+
+            File.WriteAllText(path, Convert.ToString(sb));
         }
     }
 }

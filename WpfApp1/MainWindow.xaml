@@ -12,6 +12,10 @@
         <CommandBinding Command="ApplicationCommands.New"
                     Executed="CommandBinding_Executed">
         </CommandBinding>
+        <CommandBinding Command="ApplicationCommands.Save"
+                        Executed="CommandBinding_Executed_2">
+            
+        </CommandBinding>
     </Window.CommandBindings>
     <Window.Resources>
         <local:DateTimeLessDateConverter x:Key="LessDayyConverter"/>
@@ -175,7 +179,7 @@
             MaxWidth="145" 
             Padding="10"
             x:Name="buttonToDo"
-            Command="ApplicationCommands.New"
+            Click="ButtonDelete_Click"
             HorizontalAlignment="Right">
             <Image Source="\Resources\add.png">
             </Image>
@@ -187,7 +191,7 @@
             MaxWidth="145" 
             Padding="10"
             x:Name="buttonsaveToDo"
-            Click="SaveTxtFile"
+            Command="ApplicationCommands.Save"
             HorizontalAlignment="Right">
             <Image Source="\Resources\save.png">
             </Image>

@@ -174,7 +174,7 @@
             MaxWidth="145" 
             Padding="10"
             x:Name="buttonsaveToDo"
-            Click="ButtonToDoClick"
+            Click="SaveTxtFile"
             HorizontalAlignment="Right">
             <Image Source="\Resources\save.png">
             </Image>

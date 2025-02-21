@@ -122,6 +122,23 @@ namespace WpfApp1
 
             };
         }
-        
+
+        private void SaveTxtFile(object sender, RoutedEventArgs e)
+        {
+            string[] content = listToDo.Items.OfType<string>().ToArray();
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Normal text file (*.txt)|*.txt";
+            saveFileDialog.ShowDialog();
+            saveFileDialog.OverwritePrompt = true;
+            StringBuilder sb = new StringBuilder();
+            foreach (string item in content)
+            {
+                sb.AppendLine(item);
+            }
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                File.WriteAllText(saveFileDialog.FileName, sb.ToString());
+            }
+        }
     }
 }

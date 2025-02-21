@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.Intrinsics;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -31,6 +32,7 @@ namespace WpfApp1
                 new ToDo("Слетать на Луну", new DateTime(3111, 11, 1), "Посмотреть как там"),
                 new ToDo("Посмотреть начало Нашей Эры", new DateTime(1, 12, 22), "Интересно же")
             };
+            listToDo.ItemsSource = null;
             listToDo.ItemsSource = ToDos;
             EndToDo();
         }
@@ -39,13 +41,7 @@ namespace WpfApp1
         {
             listToDo.ItemsSource = null;
             listToDo.ItemsSource = ToDos;
-        }
-
-        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
-        {
-            ToDos.Remove((sender as Button).DataContext as ToDo);
-            UpdateListToDo();
-            EndToDo();
+            SaveJSON();
         }
         private void ButtonToDoClick(object sender, RoutedEventArgs e)
         {
@@ -102,25 +98,11 @@ namespace WpfApp1
                 EndToDo();
             }
         }
-        private void SaveTxtFile(string filename, string str)
+        private void SaveJSON()
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.ShowDialog();
-            saveFileDialog.Filter = "Normal text file (*.txt)|*.txt";
-            saveFileDialog.OverwritePrompt = true;
-            StringBuilder sb = new StringBuilder();
-            StringBuilder fileContent = sb.AppendLine(str);
-            File.WriteAllText(filename, fileContent.ToString());
-        }
-        private void SaveJSON(object sender, RoutedEventArgs e)
-        {
-            ToDo itemToDo = listToDo.SelectedItem as ToDo;
-
-            ToDo td = new ToDo()
-            {
-                Doing = itemToDo.Doing
-
-            };
+            string json = JsonSerializer.Serialize(ToDos);
+            string Path = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Files", "jsonlog.json");
+            File.WriteAllText(Path, json);
         }
 
         private void SaveTxtFile(object sender, RoutedEventArgs e)
@@ -131,14 +113,51 @@ namespace WpfApp1
             saveFileDialog.ShowDialog();
             saveFileDialog.OverwritePrompt = true;
             StringBuilder sb = new StringBuilder();
-            foreach (string item in content)
-            {
-                sb.AppendLine(item);
-            }
             if (saveFileDialog.ShowDialog() == true)
             {
-                File.WriteAllText(saveFileDialog.FileName, sb.ToString());
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    for (int i = 0; i < ToDos.Count; i++)
+                    {
+                        if (ToDos[i].Doing == true)
+                        {
+                            sb.Append("✓");
+                        }
+                        else
+                        {
+                            sb.Append(" ");
+                        }
+                        sb.AppendLine(Convert.ToString(ToDos[i].Name));
+                        sb.AppendLine(" ");
+                        sb.AppendLine(Convert.ToString(ToDos[i].Description));
+                        sb.AppendLine(" ");
+                        sb.AppendLine(Convert.ToString(ToDos[i].Date));
+                        sb.AppendLine(" ");
+                        sb.AppendLine(" ");
+                    }
+                }
             }
+            string path = saveFileDialog.FileName;
+
+            File.WriteAllText(path, Convert.ToString(sb));
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            SaveJSON();
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            NewDo newDo = new NewDo();
+            newDo.Show();
+        }
+
+        private void CommandBinding_Executed_1(object sender, ExecutedRoutedEventArgs e)
+        {
+            ToDos.Remove((ToDo)listToDo.SelectedItem);
+            UpdateListToDo();
+            EndToDo();
         }
     }
 }

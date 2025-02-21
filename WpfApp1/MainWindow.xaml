@@ -6,7 +6,13 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="Окно" Height="450" Width="400"
-        Icon="\Resources\icon.png">
+        Icon="\Resources\icon.png"
+        Closed="Window_Closed">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New"
+                    Executed="CommandBinding_Executed">
+        </CommandBinding>
+    </Window.CommandBindings>
     <Window.Resources>
         <local:DateTimeLessDateConverter x:Key="LessDayyConverter"/>
         <local:DateTimeNowDayConverter x:Key="NowDayyConverter"/>
@@ -103,6 +109,13 @@
          Grid.RowSpan="2"
                  HorizontalContentAlignment="Stretch"
                  ItemContainerStyle="{StaticResource Fontt}">
+            <ListBox.CommandBindings>
+                <CommandBinding Command="ApplicationCommands.Delete"
+                            Executed="CommandBinding_Executed_1"></CommandBinding>
+            </ListBox.CommandBindings>
+            
+                
+            
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -138,7 +151,7 @@
 
                             <Button Background="#5EBEC4"
                             Name="ButtonDelete"
-                            Click="ButtonDelete_Click"
+                            Command="ApplicationCommands.Delete"
                             Grid.Column="3"
                             VerticalAlignment="Center">
                                 <Image Source="\Resources\delete.png" 
@@ -162,7 +175,7 @@
             MaxWidth="145" 
             Padding="10"
             x:Name="buttonToDo"
-            Click="ButtonToDoClick"
+            Command="ApplicationCommands.New"
             HorizontalAlignment="Right">
             <Image Source="\Resources\add.png">
             </Image>

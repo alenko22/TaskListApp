@@ -13,7 +13,7 @@
         </CommandBinding>
     </Window.CommandBindings>
     <Window.InputBindings>
-        <KeyBinding Key="E" Command="{x:Static local:NewDo.AddToDoCommand}">
+        <KeyBinding Key="Return" Command="{x:Static local:NewDo.AddToDoCommand}">
             
         </KeyBinding>
     </Window.InputBindings>
@@ -68,7 +68,7 @@
                     Название:
                 </TextBlock>
                 <TextBox TextWrapping="Wrap"  
-                     AcceptsReturn="True"  
+                     AcceptsReturn="False"  
                      AcceptsTab="True"  
                      x:Name="titleToDo"/>
                 <TextBlock> 

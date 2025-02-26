@@ -41,7 +41,25 @@ namespace WpfApp1
             dateToDo.SelectedDate.Value,
             descriptionToDo.Text
             );
-            (this.Owner as MainWindow).ToDos.Add(task);
+            if (task.Name == null ||  task.Name.Length == 0 || task.Name == " ")
+            {
+                return;
+            }
+            else if (task.Description == null || task.Description.Length == 0 || task.Description == " ")
+            {
+                MessageBox.Show("Вы не ввели описание", " ", MessageBoxButton.OK);
+                task.Description = "Нет описания";
+                (this.Owner as MainWindow).ToDos.Add(task);
+            }
+            else if (task.Date == null)
+            {
+                MessageBox.Show("Введите дату", " ", MessageBoxButton.OK);
+                SaveDo(sender, e);
+            }
+            else
+            {
+                (this.Owner as MainWindow).ToDos.Add(task);
+            }
 
             ClearGroupBoxToDo();
             UpdateListToDo();
@@ -49,6 +67,7 @@ namespace WpfApp1
             (this.Owner as MainWindow).EndToDo();
         }
 
+        // Apply affair by pressing Enter(Return)
         private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             ToDo task = new ToDo(

@@ -63,20 +63,6 @@ namespace WpfApp1
             EndToDo();
             SaveJSON();
         }
-
-        private void UpdateListToDo()
-        {
-            listToDo.ItemsSource = null;
-            listToDo.ItemsSource = ToDos;
-            SaveJSON();
-        }
-        private void ButtonToDoClick(object sender, RoutedEventArgs e)
-        {
-            NewDo newDo = new NewDo();
-            newDo.Owner = this;
-            newDo.Show();
-            
-        }
         internal void EndToDo()
         {
             int Max = 0;
@@ -155,8 +141,8 @@ namespace WpfApp1
             }
             UpdateWindow();
         }
-        
 
+        // Добавление нового дела на CTRL + N
         private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             NewDo newDo = new NewDo();
@@ -165,6 +151,7 @@ namespace WpfApp1
             UpdateWindow();
         }
 
+        // Удаление дела на Delete
         private void CommandBinding_Executed_1(object sender, ExecutedRoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить дело?", "Удаление дела", MessageBoxButton.YesNo, MessageBoxImage.Information);
@@ -179,6 +166,7 @@ namespace WpfApp1
             }
         }
 
+        // Save affairs to TXT by pressing CTRL + S
         private void CommandBinding_Executed_2(object sender, ExecutedRoutedEventArgs e)
         {
             if (ToDos.Count == 0)
@@ -190,37 +178,30 @@ namespace WpfApp1
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Normal text file (*.txt)|*.txt";
             StringBuilder sb = new StringBuilder();
-                if (saveFileDialog.ShowDialog() == true)
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                for (int i = 0; i < ToDos.Count; i++)
                 {
-                    for (int i = 0; i < ToDos.Count; i++)
+                    if (ToDos[i].Doing == true)
                     {
-                        if (ToDos[i].Doing == true)
-                        {
-                            sb.Append("✓");
-                        }
-                        else
-                        {
-                            sb.Append(" ");
-                        }
-                        sb.AppendLine(Convert.ToString(ToDos[i].Name));
-                        sb.AppendLine(" ");
-                        sb.AppendLine(Convert.ToString(ToDos[i].Description));
-                        sb.AppendLine(" ");
-                        sb.AppendLine(Convert.ToString(ToDos[i].Date));
-                        sb.AppendLine(" ");
-                        sb.AppendLine(" ");
+                        sb.Append("✓");
                     }
+                    else
+                    {
+                        sb.Append(" ");
+                    }
+                    sb.AppendLine(Convert.ToString(ToDos[i].Name));
+                    sb.AppendLine(" ");
+                    sb.AppendLine(Convert.ToString(ToDos[i].Description));
+                    sb.AppendLine(" ");
+                    sb.AppendLine(Convert.ToString(ToDos[i].Date));
+                    sb.AppendLine(" ");
+                    sb.AppendLine(" ");
                 }
-            string path = saveFileDialog.FileName;
-            if (path == null)
-            {
-                return;
+                string path1 = saveFileDialog.FileName;
+                File.WriteAllText(path1, Convert.ToString(sb));
             }
-            else
-            {
-                File.WriteAllText(path, Convert.ToString(sb));
-
-            }
+            
         }
         private void LoadFromJSON()
         {

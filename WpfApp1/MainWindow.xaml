@@ -1,19 +1,19 @@
-﻿<Window x:Class="WpfApp1.MainWindow"
+﻿<Window x:Class="TaskListApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:local="clr-namespace:TaskListApp"
         mc:Ignorable="d"
         Title="Окно" Height="450" Width="400"
         Icon="\Resources\icon.png"
-        Closed="Window_Closed">
+        Closed="WindowClosed">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New"
-                    Executed="CommandBinding_Executed">
+                    Executed="CommandNew">
         </CommandBinding>
         <CommandBinding Command="ApplicationCommands.Save"
-                        Executed="CommandBinding_Executed_2">
+                        Executed="CommandSaveTXT">
             
         </CommandBinding>
     </Window.CommandBindings>
@@ -115,7 +115,7 @@
                  ItemContainerStyle="{StaticResource Fontt}">
             <ListBox.CommandBindings>
                 <CommandBinding Command="ApplicationCommands.Delete"
-                            Executed="CommandBinding_Executed_1"></CommandBinding>
+                            Executed="CommandDelete"></CommandBinding>
             </ListBox.CommandBindings>
             
                 
@@ -136,8 +136,8 @@
                             </Grid.RowDefinitions>
 
                             <CheckBox IsChecked="{Binding Path=Doing}"
-                                      Checked="CheckBoxDoing_Checked"
-                                      Unchecked="CheckBoxDoing_Unchecked"
+                                      Checked="CheckBoxDoingChecked"
+                                      Unchecked="CheckBoxDoingUnchecked"
                               x:Name="CheckBoxDoing"
                               VerticalAlignment="Center"
                               Margin="5"/>
@@ -155,7 +155,7 @@
 
                             <Button Background="#5EBEC4"
                             Name="ButtonDelete"
-                            Click="ButtonDelete_Click"
+                            Click="ButtonDeleteClick"
                             Grid.Column="3"
                             VerticalAlignment="Center">
                                 <Image Source="\Resources\delete.png" 

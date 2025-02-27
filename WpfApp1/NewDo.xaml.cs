@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WpfApp1
+namespace TaskListApp
 {
     public partial class NewDo : Window
   {  
@@ -22,6 +22,7 @@ namespace WpfApp1
             dateToDo.SelectedDate = DateTime.Now;
         }
         public static RoutedCommand AddToDoCommand = new RoutedCommand();
+        // GroupBox needs to be cleared for new task
         private void ClearGroupBoxToDo()
         {
             titleToDo.Text = null;
@@ -29,10 +30,11 @@ namespace WpfApp1
             descriptionToDo.Text = "Нет описания";
         }
 
+        // Updating main List of tasks
         private void UpdateListToDo()
         {
             (this.Owner as MainWindow).listToDo.ItemsSource = null;
-            (this.Owner as MainWindow).listToDo.ItemsSource = (this.Owner as MainWindow).ToDos;
+            (this.Owner as MainWindow).listToDo.ItemsSource = (this.Owner as MainWindow).toDos;
         }
         public void SaveDo(object sender, RoutedEventArgs e)
         {
@@ -49,7 +51,7 @@ namespace WpfApp1
             {
                 MessageBox.Show("Вы не ввели описание", " ", MessageBoxButton.OK);
                 task.Description = "Нет описания";
-                (this.Owner as MainWindow).ToDos.Add(task);
+                (this.Owner as MainWindow).toDos.Add(task);
             }
             else if (task.Date == null)
             {
@@ -58,29 +60,29 @@ namespace WpfApp1
             }
             else
             {
-                (this.Owner as MainWindow).ToDos.Add(task);
+                (this.Owner as MainWindow).toDos.Add(task);
             }
 
             ClearGroupBoxToDo();
             UpdateListToDo();
             this.Close();
-            (this.Owner as MainWindow).EndToDo();
+            (this.Owner as MainWindow).UpdateTaskBar();
         }
 
         // Apply affair by pressing Enter(Return)
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void CommandEnter(object sender, ExecutedRoutedEventArgs e)
         {
             ToDo task = new ToDo(
             titleToDo.Text,
             dateToDo.SelectedDate.Value,
             descriptionToDo.Text
             );
-            (this.Owner as MainWindow).ToDos.Add(task);
+            (this.Owner as MainWindow).toDos.Add(task);
 
             ClearGroupBoxToDo();
             UpdateListToDo();
             this.Close();
-            (this.Owner as MainWindow).EndToDo();
+            (this.Owner as MainWindow).UpdateTaskBar();
         }
     }
 }

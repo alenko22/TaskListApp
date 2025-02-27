@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace WpfApp1
+namespace TaskListApp
 {
     /// <summary>
     /// Interaction logic for App.xaml

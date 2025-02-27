@@ -8,6 +8,7 @@ using System.Windows.Data;
 
 namespace TaskListApp
 {
+    //Converter of date for green color of tasks
     class DateTimeNowUpDayConverter : IValueConverter
     {
         public object Convert(object value,

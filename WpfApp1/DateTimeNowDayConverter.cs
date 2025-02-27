@@ -8,6 +8,7 @@ using System.Windows.Data;
 
 namespace TaskListApp
 {
+    //Converter of date for yellow color of tasks
     class DateTimeNowDayConverter : IValueConverter
     {
         public object Convert(object value,

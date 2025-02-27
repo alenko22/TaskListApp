@@ -8,6 +8,7 @@ using System.Windows.Data;
 
 namespace TaskListApp
 {
+    //Converter of date for red color of tasks
     public class DateTimeLessDateConverter : IValueConverter
     {
         public object Convert(object value,

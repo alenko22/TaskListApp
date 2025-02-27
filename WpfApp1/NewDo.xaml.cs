@@ -22,6 +22,7 @@ namespace TaskListApp
             dateToDo.SelectedDate = DateTime.Now;
         }
         public static RoutedCommand AddToDoCommand = new RoutedCommand();
+
         // GroupBox needs to be cleared for new task
         private void ClearGroupBoxToDo()
         {
@@ -30,7 +31,7 @@ namespace TaskListApp
             descriptionToDo.Text = "Нет описания";
         }
 
-        // Updating main List of tasks
+        // Updating main list of tasks
         private void UpdateListToDo()
         {
             (this.Owner as MainWindow).listToDo.ItemsSource = null;
